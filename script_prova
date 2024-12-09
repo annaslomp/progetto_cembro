@@ -1,5 +1,9 @@
+# Make use of english comments, in this manner anyone in the planet could fork and help
 #non sapendo che pacchetti avrei utilizzato ho caritcato praticamente tutti quelli che pensavo mi sarebbero stati utili
 #lo script è una bozza, sicuramente è da rivedere e da sistemare
+
+# I suggest avoiding this pratice. Make a check on the functions you used and upload related packages
+
 install.packages("ggplot2")
 install.packages("patchwork")
 install.packages("raster")
@@ -58,6 +62,7 @@ banda_swir_15.09 <- rast("C:/Users/Proprietario/Desktop/fmach/immagini_copernicu
 Corno_Nero_15.09_CN <- rast("C:/Users/Proprietario/Desktop/fmach/immagini_copernicus_CornoNero/CN/15.09.25 ColoriN_CornoNero.tiff")
 df_perc <- c()
 
+# A simple crop function might be used here (?)
 
 st_crs(AreaRitaglioCornoNero)
 crs_v <- crs(Corno_Nero_15.09_CN)
@@ -78,6 +83,7 @@ banda_swir_15.09_area <- crop(banda_swir_15.09, st_as_sf(AreaRitaglioCornoNero))
 CN_CornoNero_15.09_area <- crop(Corno_Nero_15.09_CN, st_as_sf(AreaRitaglioCornoNero))
 banda_vis_NDSI_15.09 <- CN_CornoNero_15.09_area[[3]]
 
+# this is correct! I suggest avoiding raster + terra and translate all the commands of raster to those of terra
 banda_vis_NDSI_15.09 <- terra::resample(banda_vis_NDSI_15.09, banda_swir_15.09_area, 
                                         method = "bilinear" )
 res(banda_vis_NDSI_15.09)
